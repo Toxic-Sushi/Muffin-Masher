@@ -2,17 +2,20 @@ int EL =4; //E1
 int ER =6; //E2
 int ML =5; //M1
 int MR =7; //M2
+
 int Lf1 = 14; // in Fahrtrichtung Rechts
 int Lf2 = 15; // in Fahrtrichtung mitte Rechts
 int Lf3 = 16 ;// in Fahrtrichtung mitte Links
 int Lf4 = 17 ;// in Fahrtrichtung Links
 int IR1 = A6; // InfraRotSensor Vorne
+
 int G; // Letzte Position der Linie
-int M = 0; // Modus: M=0:Linefollowing M=1:Hinderniss M=2 Keine Linie f�r max 3 sec. M=3 l�nger als 3 Sec keine Linie M=4 Rescue Mode M=5 Panik Modus
 int Z = 0 ; // Momentane Linienposition
+
 int V = 225;
 int R = -200;
 int y = -175;
+
 void setup(){
 pinMode(Lf1, INPUT);
 pinMode(Lf2, INPUT);
@@ -59,7 +62,7 @@ sensorInput = (digitalRead(Lf1) << 3) | (digitalRead(Lf2) << 2) | (digitalRead(L
 }
 void loop(){
 updateSensors();
-if(M == 0){
+
 if(sensorInput== 0b1100) {
 Z = 2;
 G = 2;
@@ -226,4 +229,4 @@ default:
 break;
 }
 }
-}
+
