@@ -1,7 +1,6 @@
-int EL =4; //E1
-int ER =6; //E2
-int ML =5; //M1
-int MR =7; //M2
+
+#include "Motor.h"
+#include "Sensors.h"
 
 int Lf1 = 14; // in Fahrtrichtung Rechts
 int Lf2 = 16; // in Fahrtrichtung mitte Rechts
@@ -22,45 +21,14 @@ void setup(){
   pinMode(Lf2, INPUT);
   pinMode(Lf3, INPUT);
   pinMode(Lf4, INPUT);
-  pinMode(EL,OUTPUT);
-  pinMode(ER,OUTPUT);
-  pinMode(ML,OUTPUT);
-  pinMode(MR,OUTPUT);
   pinMode(D,INPUT);
+
+  motorSetup();
+
   Serial.begin(9600);
 }
 
 int sensorInput = 0;
-void setMotors(int lMotor, int rMotor) {
-  Serial.print("L: ");
-  Serial.print(lMotor);
-  Serial.print(" R: ");
-  Serial.print(rMotor);
-  Serial.print(" G: ");
-  Serial.print(G);
-  Serial.print(" Z: ");
-  Serial.print(Z);
-  Serial.print(" S: ");
-  Serial.println(sensorInput, BIN);
-
-  if(rMotor > 0) {
-    digitalWrite(MR, LOW);
-    analogWrite(ER, rMotor);
-  }
-  else {
-    digitalWrite(MR, HIGH);
-    analogWrite(ER, -rMotor);
-  }
-
-  if(lMotor > 0) {
-    digitalWrite(ML, LOW);
-    analogWrite(EL, lMotor);
-  }
-  else {
-    digitalWrite(ML, HIGH);
-    analogWrite(EL, -lMotor);
-  }
-}
 
 void updateSensors() {
   sensorInput = (digitalRead(Lf1) << 3) | (digitalRead(Lf2) << 2) | (digitalRead(Lf3) << 1) | (digitalRead(Lf4));
@@ -148,14 +116,14 @@ void loop(){
     G = 17;
     delay(10);
   }
-  
-  
+
+
   switch(Z) {
   case 2:
   case 3:
     setMotors(V,R);
   break;
-  
+
   case 4:
   case 5:
     setMotors(V,V);
@@ -168,11 +136,11 @@ void loop(){
     setMotors(R,V);
     delay(400);
   break;
-  
+
   case 7:
     setMotors(V,V);
   break;
-  
+
   case 8:
   switch(G){
     case 2:
@@ -182,7 +150,7 @@ void loop(){
       setMotors(R,V);
       delay(400);
     break;
-    
+
     case 4:
     case 5:
       setMotors(y,y);
@@ -190,67 +158,67 @@ void loop(){
       setMotors(V,R);
       delay(400);
     break;
-    
+
     case 6:
       setMotors(y,y);
       delay(300);
       setMotors(R,V);
       delay(400);
     break;
-    
+
     case 12:
       setMotors(y,y);
       delay(300);
       setMotors(V,R);
       delay(400);
     break;
-    
+
     case 9:
       setMotors(V,V);
     break;
-    
+
     default:
       setMotors(V,V);
   }
   break;
-  
+
   case 9:
     setMotors(R,V);
     delay(500);
   break;
-  
+
   case 10:
     setMotors(R,V);
   break;
-  
+
   case 11:
     setMotors(V,R);
   break;
-  
+
   case 12:
     setMotors(R,V);
   break;
-  
+
   case 13:
     setMotors(V,V);
   break;
-  
+
   case 14:
     setMotors(R,V);
   break;
-  
+
   case 15:
     setMotors(V,R);
   break;
-  
+
   case 16:
     setMotors(R,V);
   break;
-  
+
   case 17:
     setMotors(V,R);
   break;
-  
+
   default:
   break;
   }
