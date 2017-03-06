@@ -14,8 +14,8 @@ int Z = 0 ; // Momentane Linienposition
 
 
 int V = 150;
-int R = -50;
-int y = -75;
+int R = -125;
+int y = -100;
 
 void setup(){
   pinMode(Lf1, INPUT);
@@ -228,7 +228,7 @@ void loop(){
   break;
   
   case 12:
-    setMotors(R,V);
+    setMotors(V,R);
   break;
   
   case 13:
